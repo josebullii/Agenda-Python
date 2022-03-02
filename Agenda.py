@@ -1,4 +1,7 @@
 #Menú de inicio
+from operator import index
+
+
 def mostrarMenu():
     seleccion = 0
 
@@ -31,11 +34,36 @@ def añadirContacto(vAgenda):
 
     vAgenda.append(contacto)
 
+#Buscar contacto (devuelve su posición en la lista)
+def buscarContacto(vAgenda):
+    v = []
+    dato = input("Dime el nombre o el teléfono que deseas buscar: ")
+    cont = 0
+    for i in vAgenda:
+        if i.find(dato) >= 0:
+            return cont
+        cont = cont + 1
+    print("Contacto no existente")
+
+#Mostrar la información del contacto
+def muestraContacto(vAgenda, index):
+    if(index != None):
+        datos = vAgenda[index].split("-")
+        print("Nombre: ", datos[0])
+        print("Número: ", datos[1], "\n")
+
+#Borrar contacto
+def borrarContacto(vAgenda, index):
+    vAgenda.pop(index)
+
+#Editar contacto
+def editarContacto(vAgenda, index):
+    print("hola")
+
 #Mostrar todos los contactos
 def mostrarContactos():
     for contacto in vAgenda:
-        print(contacto)
-
+        print(contacto, "\n")
 
 #Inicio del programa
 print("***** AGENDA DE CONTACTOS *****\n")
@@ -44,14 +72,21 @@ vAgenda = []
 opcion = mostrarMenu()
 while (opcion != 6):
     if opcion == 1:
-        print("Añadir contacto\n")
         añadirContacto(vAgenda)
+
     elif opcion == 2:
         print("Editar contacto\n")
+
     elif opcion == 3:
-        print("Borrar contacto\n")
+        #Borrar contacto de la agenda
+        index = buscarContacto(vAgenda)
+        if index != None:
+            vAgenda.pop(index)
+            "Contacto eliminado\n"
+
     elif opcion == 4:
-        print("Buscar contacto\n")
+        muestraContacto(vAgenda, buscarContacto(vAgenda))
+
     else:
         print("Mostrar todos los contactos\n")
         mostrarContactos()
