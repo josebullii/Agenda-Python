@@ -58,7 +58,15 @@ def borrarContacto(vAgenda, index):
 
 #Editar contacto
 def editarContacto(vAgenda, index):
-    print("hola")
+    index = buscarContacto(vAgenda)
+    if index != None:
+        vAgenda.pop(index)
+        nombre = input("Dime el nuevo nombre del contacto: ")
+        numero = input("Escribe su nuevo número de teléfono: ")
+        index = nombre + (" - ") + numero
+
+        vAgenda.append(index)
+        print("Contacto editado\n")
 
 #Mostrar todos los contactos
 def mostrarContactos():
@@ -75,20 +83,19 @@ while (opcion != 6):
         añadirContacto(vAgenda)
 
     elif opcion == 2:
-        print("Editar contacto\n")
+        editarContacto(vAgenda, index)
 
     elif opcion == 3:
         #Borrar contacto de la agenda
         index = buscarContacto(vAgenda)
         if index != None:
             vAgenda.pop(index)
-            "Contacto eliminado\n"
+            print("Contacto eliminado\n")
 
     elif opcion == 4:
         muestraContacto(vAgenda, buscarContacto(vAgenda))
 
     else:
-        print("Mostrar todos los contactos\n")
         mostrarContactos()
     
     opcion = mostrarMenu()
